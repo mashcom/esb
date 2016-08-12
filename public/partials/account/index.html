@@ -1,0 +1,27 @@
+<div ng-controller="AccountCtrl">
+
+<div class="col-lg-6 col-lg-offset-3" >
+  <div class="box box-info bg-white">
+                <div class="box-header with-border">
+                  <h3 class="box-title text-center">Deposit Money</h3>
+                </div><!-- /.box-header -->
+
+                <!-- form start -->
+                <form ng-submit="deposit()" class="form-horizontal">
+                  <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                  <div class="box-body">
+                    <div class="form-group">
+                      <div class="col-sm-12">
+                        <input type="number" class="form-control input-lg" ng-model='deposit_amount' name='amount' placeholder="Amount" autofocus="">
+                      </div>
+                    </div>
+                    </div><!-- /.box-body -->
+                  <div class="box-footer">
+
+                    <button type="submit" class="btn btn-primary pull-right btn-md">Deposit</button>
+                  </div><!-- /.box-footer -->
+                </form>
+              </div>
+            </div>
+
+</div>
