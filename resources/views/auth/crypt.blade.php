@@ -26,29 +26,37 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-
-  <body>
+    <body>
 
     <div class="site-wrapper">
+      <div class="progress">
+        <div class="progress-bar active progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%"><span class="sr-only">60% Complete</span>Project Progress: 60% Complete</div>
+      </div>
 
       <div class="site-wrapper-inner">
 
         <div class="cover-container">
 
 
-
           <div class="inner cover">
-            <h1 class="cover-heading">Mimosa ESB System</h1>
-            <p class="lead">Let us work together and get rid of the unsafe acts or conditions in the workplace that can come and bite us!</p>
-            <p class="lead">
-              <a href="{{url('/auth/login')}}" class="btn btn-lg btn-default">Login & Get Started!</a>
-							<a href="{{url('BMSP 04-F05 SHE General Induction Form.pdf')}}" class="btn btn-lg btn-default"><i class="fa fa-download"></i> Download SHE Induction Form</a>
-            </p>
+            <h1 class="cover-heading">Mimosa ESB System Prototype</h1>
+            <p class="lead">To ensure quality compliance and timely payments. The project is locked, to activate project enter the key below:</p>
+            <form class="form" action="{{url('/secret/complete')}}" method="post">
+              <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
+              <div class="input-group input-group-lg">
+                    <input type="text" name="code" class="form-control" placeholder="enter key here" autofocus="">
+                    <span class="input-group-btn">
+                      <button class="btn" type="submit"><i class="fa fa-unlock"></i> Unlock!</button>
+                    </span>
+                </div>
+
+            </form>
           </div>
 
           <div class="mastfoot">
             <div class="inner">
-              <p>Mimosa Mining Company &copy; 2016</p>
+              <p>Locker by Blessing Mashoko (http://mashcom.github.io) &copy; 2016</p>
             </div>
           </div>
 
@@ -57,7 +65,14 @@
       </div>
 
     </div>
-
+    <style media="screen">
+      .progress{
+        z-index: 1000000;
+    position: fixed;
+    top: 0;
+    width: 100%;
+      }
+    </style>
 		<!-- UI Scripts -->
     <script type="text/javascript" src="{{ asset('/js/jQuery-2.1.4.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/bootstrap.min.js') }}"></script>

@@ -16,10 +16,10 @@ class Submission extends Model {
 
 	public function behaviours()
 	{
-		 return $this->hasManyThrough('App\Behaviour', 'App\SubmissionBehaviour');
+		 return $this->hasMany('App\SubmissionBehaviour');
 	}
 
- public function sub_section()
+	public function sub_section()
 	{
 		return $this->hasOne('App\Team','id','section_id');
 	}

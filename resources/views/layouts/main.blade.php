@@ -7,8 +7,7 @@
     <title>Mimosa Mining Company</title>
 
     <link href="{{ asset('/css/bootstrap.css') }}" rel="stylesheet">
-    <link href="{{ asset('/css/animate.css') }}" rel="stylesheet">
-    <link href="{{ asset('/app/vendor/cfploader/loading-bar.css') }}" rel="stylesheet">
+    <link href="{{ asset('/css/font-awesome.min.css') }}" rel="stylesheet">
     <!-- Fonts -->
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -31,7 +30,7 @@
                     <span class="icon-bar"></span>
                 </button>
 
-                <a class="navbar-brand logo text-" href="{{url('/')}}">ESB System</a>
+                <a class="navbar-brand logo text-" href="{{url('submissions')}}">ESB System</a>
             </div>
 
             <ul class="nav navbar-nav navbar-right navbar-collapse collapse">
@@ -51,18 +50,21 @@
 
     <div class="container">
        @yield('content')
-      
+
       </div>
 
     <footer class="footer">
       <div class="container">
        <h6 class="text-center">Mimosa Mining Company &copy; 2016</h6>
+       <h6 class="text-center">Environmnental and Safety Behavoural System</h6>
+       <h6 class="text-center">Developed by W. Temani</h6>
       </div>
     </footer>
 
     <!-- UI Scripts -->
     <script type="text/javascript" src="{{ asset('/js/jQuery-2.1.4.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/highcharts.js') }}"></script>
 
 
 </body>

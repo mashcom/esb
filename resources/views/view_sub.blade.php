@@ -1,7 +1,8 @@
 @extends('layouts.main')
 @section('content')
 
-{{dd($submission->behaviours)}}
+
+
   <div class="col-lg-12">
     <h2 class="text-center">Observation Pact Submission</h2>
 
@@ -25,7 +26,15 @@
       <div class="panel">
 
             <div class="panel-body">
-             <h4 class="pull-right"><span class="label label-success">{{$submission->status}}</span></h4>
+             <h4 class="pull-right">
+               @if($submission->status =="approved")
+                 <span class="label label-success text-uppercase"><i class="fa fa-tick"></i>
+               @elseif($submission->status =="disapproved")
+                 <span class="label label-danger text-uppercase"><i class="fa fa-times"></i>
+               @else
+                 <span class="label label-default text-uppercase"><i class="fa fa-refresh"></i>
+               @endif
+            {{$submission->status}}</span></h4>
             </div>
           </div>
     </div>
@@ -33,12 +42,13 @@
     <div class="col-sm-6">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h3 class="panel-title">Where it was seen.</h3>
+              <h3 class="panel-title"><i class="fa fa-map-marker"></i> Where it was seen.</h3>
             </div>
             <div class="panel-body">
 
               <h5>Department: {{$submission->sub_dept->name}}</h5>
               <h5>Section/Team: {{$submission->sub_section->name}}</h5>
+              <h5>.</h5>
             </div>
           </div>
         </div>
@@ -46,7 +56,7 @@
           <div class="col-sm-6">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h3 class="panel-title">Observation Timing</h3>
+              <h3 class="panel-title"><i class="fa fa-clock-o"></i> Observation Timing</h3>
             </div>
             <div class="panel-body">
               <h5>Date: {{$submission->date}}</h5>
@@ -60,7 +70,7 @@
         <div class="col-sm-12">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h3 class="panel-title">Values</h3>
+              <h3 class="panel-title"><i class="fa fa-leaf"></i> Values</h3>
             </div>
             <div class="panel-body">
               <h4>
@@ -75,7 +85,30 @@
         <div class="col-sm-12">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h3 class="panel-title">Task being carried out</h3>
+              <h3 class="panel-title"><i class="fa fa-eye"></i> Observation</h3>
+            </div>
+            <div class="panel-body">
+              {{$submission->observation}}
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-12">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title"><i class="fa fa-comment-o"></i> Comment</h3>
+            </div>
+            <div class="panel-body">
+              {{$submission->comment}}
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-sm-12">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title"><i class="fa fa-briefcase"></i> Task being carried out</h3>
             </div>
             <div class="panel-body">
               {{$submission->task}}
@@ -90,29 +123,33 @@
               <tr>
                 <th class="col-lg-5">Observable behaviours</th>
                 <th class="col-lg-1">Safe/Unsafe</th>
-                <th class="col-lg-6">Observation</th>
+                <th class="col-lg-6">Observation/Comment</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Adherence to standard operatingprocedures and SHE standards</td>
-                <td><span class="label label-success">SAFE</span></td>
-                <td></td>
-              </tr>
+              @foreach ($submission->behaviours as $behaviours)
+                <tr>
+                  <td>{{$behaviours->behaviour->description}}</td>
+                  <td>
+                    <h5>
+                      @if($behaviours->is_safe =="unsafe")
+                        <span class="label label-danger text-uppercase">
+                      @elseif($behaviours->is_safe =="safe")
+                        <span class="label label-success text-uppercase">
+                      @else
+                        <span class="label label-primary text-uppercase">
+                      @endif
+                      {{($behaviours->is_safe)}}</span>
+                    </h5>
+                  </td>
+                  <td>{{$behaviours->comment}}</td>
+                </tr>
 
-              <tr>
-                <td>Demonstrating hard work within stipulated start and finish time</td>
-                <td><span class="label label-danger">UNSAFE</span></td>
-                <td></td>
-              </tr>
-              <tr>
+              @endforeach
+
             </tbody>
           </table>
         </div>
-
-
-
-
 
   </div>
 @endsection
