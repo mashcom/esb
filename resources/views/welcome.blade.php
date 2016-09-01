@@ -38,11 +38,11 @@
 
 
           <div class="inner cover">
-            <h1 class="cover-heading">Mimosa ESB System</h1>
+            <h1 class="cover-heading">Mimosa SHE Pact Submission System</h1>
             <p class="lead">Let us work together and get rid of the unsafe acts or conditions in the workplace that can come and bite us!</p>
             <p class="lead">
               <a href="{{url('/auth/login')}}" class="btn btn-lg btn-default">Login & Get Started!</a>
-							<a href="{{url('BMSP 04-F05 SHE General Induction Form.pdf')}}" class="btn btn-lg btn-default"><i class="fa fa-download"></i> Download SHE Induction Form</a>
+            	<a href="{{url('BMSP 04-F05 SHE General Induction Form.pdf')}}" class="btn btn-lg btn-default"><i class="fa fa-download"></i> Download SHE Induction Form</a>
             </p>
           </div>
 

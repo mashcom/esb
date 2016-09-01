@@ -4,6 +4,7 @@ use Storage;
 use Auth;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\SubmissionBehaviour;
 
 use Illuminate\Http\Request;
 
@@ -53,6 +54,17 @@ class SubmissionController extends Controller {
 	 */
 	public function store(Request $request)
 	{
+		//take the values and process them
+		$values ="";
+		for($i=0;$i<=20;$i++){
+			if(isset($request["values_$i"])){
+				$comma = ",";
+				if(empty($values)){
+					$comma = "";
+				}
+				$values .= $comma.$request["values_$i"];
+			}
+		}
 
 		$this->validate($request, [
         'department_id' => 'required',
@@ -76,9 +88,21 @@ class SubmissionController extends Controller {
 		$Sub->task = $request->task;
 		$Sub->observation = $request->observation;
 		$Sub->comment = $request->comment;
+		$Sub->values = $values;
+		$Sub->duration = $request->end_time;
 
 		if($Sub->save()){
-
+			//save the behaviours
+			for($i=1;$i<=13;$i++){
+				$behaviour = $request["behaviour_$i"];
+				if(!empty($behaviour)){
+					$SubmissionBehaviour = new SubmissionBehaviour();
+					$SubmissionBehaviour->submission_id = $Sub->id;
+					$SubmissionBehaviour->behaviour_id = $i;
+					$SubmissionBehaviour->is_safe = $behaviour;
+					$SubmissionBehaviour->save();
+				}
+			}
 			return redirect('submissions/'.$Sub->id);
 		}
 		return back()->withInput();

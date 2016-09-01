@@ -1,30 +1,42 @@
 @extends('layouts.main')
 @section('content')
 
+@if((Auth::user()->is_admin !=1) && (Auth::user()->id != $user_info->id) )
 
+  You are not authorised to view this record
+  {{dd()}}
+@endif
 
-<div class="col-lg-3 col-sm-3 placeholder text-center">
+<div class="col-lg-2 col-sm-2 placeholder text-center">
+  <br>  <br>  <br>  <br>  <br>  <br>  <br>
   <center>
-            <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-            <h4>{{$user_info->employee_id}}</h4>
+      <img class="img-circle"  src="{{url('default.png')}}" width="150px"/>
+              <h4>{{$user_info->employee_id}}</h4>
             <h5 class="text-muted">{{$user_info->name}}</h5>
             <h5 class="text-muted">Dept. {{$user_info->dept->name}}</h5>
   </center>
 </div>
 
 
- <div class="col-md-9">
-   <h2 class="text-primary">User Submission Report</h2>
+ <div class="col-md-10">
+   <h2 class="text-primary">
+     @if(Auth::user()->id == $user_info->id )
+     Your Submissions
+     @else
+      User Submission Report
+     @endif
+
+   </h2>
    <br/><br/><br/>
        <div class="row col-lg-12">
         <h4 class="text-bold"><i class="fa fa-clock-o"></i> Last Submissions: {{$last_submission}}</h4>
       </div>
-      
+
         <div class="row">
        <div class="col-sm-3">
          <div class="panel panel-default">
            <div class="panel-heading">
-             <h3 class="panel-title text-center">All Submissions</h3>
+             <h3 class="panel-title text-center"><i class="fa fa-archive"></i> All Submissions</h3>
            </div>
            <div class="panel-body">
              <h1 class="text-center"> {{count($submissions)}}</h1>
@@ -35,7 +47,7 @@
        <div class="col-sm-3">
          <div class="panel panel-default">
            <div class="panel-heading">
-             <h3 class="panel-title text-center">Pending</h3>
+             <h3 class="panel-title text-center"><i class="fa fa-clock-o"></i> Pending</h3>
            </div>
            <div class="panel-body">
              <h1 class="text-center"> {{$count_pending}}</h1>
@@ -46,7 +58,7 @@
        <div class="col-sm-3">
          <div class="panel panel-success">
            <div class="panel-heading">
-             <h3 class="panel-title text-center">Approved</h3>
+             <h3 class="panel-title text-center"><i class="fa fa-check-square"></i> Approved</h3>
            </div>
            <div class="panel-body">
              <h1 class="text-center"> {{$count_approved}}</h1>
@@ -59,7 +71,7 @@
        <div class="col-sm-3">
          <div class="panel panel-danger">
            <div class="panel-heading">
-             <h3 class="panel-title text-center">Disapproved</h3>
+             <h3 class="panel-title text-center"><i class="fa fa-times"></i> Disapproved</h3>
            </div>
            <div class="panel-body">
              <h1 class="text-center"> {{$count_disapproved}}</h1>
@@ -99,6 +111,7 @@
 
                 <td>
                   <a href="submissions/{{$submission->id}}" class="btn btn-default btn-xs">View</a>
+@if(Auth::user()->is_admin ==1)
                   <div class="btn-group">
                       <button type="button" class="btn btn-default btn-xs">Action</button>
                       <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
@@ -111,7 +124,9 @@
                         <li><a href="submissions/disapproved/{{$submission->id}}" class="text-danger">Disapprove</a></li>
                       </ul>
 
-                    </div></td>
+                    </div>
+                    @endif
+                  </td>
               </tr>
 
               @endforeach

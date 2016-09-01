@@ -11,7 +11,7 @@
   <div class="col-lg-3 col-sm-3 placeholder text-center">
 
     <center>
-              <img class="img-circle" src="http://localhost/AdminLTE-2.3.0/dist/img/user2-160x160.jpg" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+              <img class="img-circle" src="../default.png" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
               <h4>{{$submission->user->name}}</h4>
               <h5 class="text-muted">{{$submission->user->employee_id}}</h5>
               <h5 class="text-muted">Dept: {{$submission->user->dept->name}}</h5>
@@ -26,6 +26,8 @@
       <div class="panel">
 
             <div class="panel-body">
+              <h4 class="pull-left">Submission ID: {{$submission->id}}<h4>
+
              <h4 class="pull-right">
                @if($submission->status =="approved")
                  <span class="label label-success text-uppercase"><i class="fa fa-tick"></i>
@@ -61,7 +63,7 @@
             <div class="panel-body">
               <h5>Date: {{$submission->date}}</h5>
               <h5>Time: {{$submission->time}}</h5>
-              <h5>Duration: {{$submission->duration}}</h5>
+              <h5>Duration: {{$submission->duration}} Minutes</h5>
             </div>
           </div>
         </div>
@@ -123,7 +125,6 @@
               <tr>
                 <th class="col-lg-5">Observable behaviours</th>
                 <th class="col-lg-1">Safe/Unsafe</th>
-                <th class="col-lg-6">Observation/Comment</th>
               </tr>
             </thead>
             <tbody>
@@ -142,7 +143,6 @@
                       {{($behaviours->is_safe)}}</span>
                     </h5>
                   </td>
-                  <td>{{$behaviours->comment}}</td>
                 </tr>
 
               @endforeach
@@ -150,6 +150,12 @@
             </tbody>
           </table>
         </div>
+
+
+  </div>
+  <div class="col-lg-12">
+    <h1>.</h1>
+      <h1>.</h1>
 
   </div>
 @endsection

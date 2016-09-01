@@ -19,7 +19,7 @@
 <body class="auth-page">
 
 <div class="col-lg-12 text-center">
-    <h1 class="text-bold">ESB System</h1>
+    <h1 class="text-bold">SHE Pact Submission System</h1>
 </div>
 @yield('content')
 

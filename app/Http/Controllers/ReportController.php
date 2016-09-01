@@ -30,7 +30,7 @@ class ReportController extends Controller {
 		$this->validate($request, [
 				'from_date' => 'date|before:tomorrow',
 				'to_date' => 'date|after:from_date'
-    ]);
+    	]);
 		$departments = Department::all();
 		$teams = Team::all();
 

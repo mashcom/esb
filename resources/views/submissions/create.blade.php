@@ -17,46 +17,77 @@
        </div>
      @endif
 
-     <form role="form" method="POST" action="{{ url('/submissions') }}">
+     <form role="form" method="POST" action="{{ url('/submissions/store/new') }}">
        <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                     <fieldset>
 
                       <legend>Where did you see it?</legend>
-                        <div class="form-group col-lg-6">
-                          <label>Department</label>
+                      <div class="col-lg-6">
+                        <label>Department</label>
+                        <div class="input-group">
+                          <div class="input-group-addon">
+                            <i class="fa fa-building"></i>
+                          </div>
                           <select type="text" class="form-control" name="department_id">
                             @foreach ($departments as $dept)
                               <option value="{{$dept->id}}">{{$dept->name}}</option>
                             @endforeach
                           </select>
                         </div>
-                        <div class="form-group col-lg-6">
-                          <label>Section/Team</label>
+</div>
+  <div class="col-lg-6">
+    <label>Section/Team</label>
+                        <div class="input-group ">
+                          <div class="input-group-addon">
+                            <i class="fa fa-users"></i>
+                          </div>
                           <select type="text" class="form-control" name="section_id">
                             @foreach ($teams as $team)
                               <option value="{{$team->id}}">{{$team->name}}</option>
                             @endforeach
                           </select>
                           </div>
+                        </div>
+                        <div class="col-lg-12">
+                          <h4>.</h4>
+                        </div>
                     </fieldset>
 
                     <fieldset>
                       <legend>When did you see it?</legend>
-                        <div class="form-group col-lg-4">
-                          <label>Date</label>
-                          <input type="date" class="form-control" name="date"  value="{{ old('date') }}">
-                        </div>
-                        <div class="form-group col-lg-4">
-                          <label>Start Time</label>
-                          <input type="time" class="form-control" name="start_time" value="{{ old('start_time') }}">
-                        </div>
+                  <div class="col-lg-4">
+                  <label>Date:</label>
+                  <div class="input-group col-lg-12">
+                    <div class="input-group-addon">
+                      <i class="fa fa-calendar"></i>
+                    </div>
+                    <input class="form-control" type="date" name="date">
+                  </div><!-- /.input group -->
+                </div>
 
-                        <div class="form-group col-lg-4">
-                          <label>End Time</label>
-                          <input type="time" class="form-control" name="end_time"  value="{{ old('end_time') }}">
-                        </div>
+                <div class="col-lg-4">
+                    <label>Start Time</label>
+                        <div class="input-group col-lg-12">
 
+                          <div class="input-group-addon">
+                            <i class="fa fa-clock-o"></i>
+                          </div>
+                          <input type="time" class="form-control timepicker" name="start_time" value="{{ old('start_time') }}">
+                        </div>
+                      </div>
+                      <div class="col-lg-4">
+                        <label>Duration (Minutes)</label>
+                        <div class="input-group col-lg-12">
+                          <div class="input-group-addon">
+                            <i class="fa fa-moon-o"></i>
+                          </div>
+                          <input type="number" min="1" max="1000"  class="form-control" name="end_time"  value="{{ old('end_time') }}">
+                        </div>
+                      </div>
+                      <div class="col-lg-12">
+                        <h4>.</h4>
+                      </div>
                       <legend>What did you see</legend>
                         <div class="form-group col-lg-12">
                           <label>Observation</label>
@@ -77,13 +108,21 @@
 
                         <legend>VALUES (Select values under observation –Refer to pact)</legend>
                         <div class="col-md-12">
-                          <select class="form-control" name="values" multiple style="height:400px">
-                            @foreach ($values as $value)
-                                <option value="{{$value}}">
-                                  {{$value}}
-                                </option>
-                          @endforeach
-                        </select>
+
+                            <?php
+                            $value_id = 0;
+                            foreach ($values as $value):
+                              $value_id+=1;
+                              ?>
+
+                              <div class="form-group col-lg-6">
+                                  <label>
+                                    <input type="checkbox" name="values_{{$value_id}}" value="{{$value}}">
+                                    {{$value}}
+                                  </label>
+                              </div>
+
+                          <?php endforeach ?>
                         </br>
 
                         </div>
@@ -106,7 +145,7 @@
                                 <tr>
                                   <td>{{$b->description}}</td>
                                   <td>
-                                    <select class="form-control" name="">
+                                    <select class="form-control" name="behaviour_{{$b->id}}">
                                       <option value=""></option>
                                       <option value="safe">Safe</option>
                                       <option value="unsafe">Unsafe</option>
@@ -128,3 +167,13 @@
 </div>
 
 @endsection
+
+<script type="text/javascript">
+  (function(){
+    //Datemask2 mm/dd/yyyy
+    $(".timepicker").timepicker({
+          showInputs: false
+        });
+        $("#sub_date").inputmask("mm/dd/yyyy", {"placeholder": "mm/dd/yyyy"});
+  })
+</script>

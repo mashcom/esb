@@ -15,26 +15,38 @@
 
 
 	Route::group(['middleware' => ['auth']], function () {
-				Route::resource('submissions','SubmissionController');
-				Route::get('submissions/{action}/{id}','SubmissionController@approval');
-				Route::get('submissions/{id?}',function(){
-					return view('employee_subs');
+
+
+				Route::get('submissions/create/new','SubmissionController@create');
+				Route::post('submissions/store/new','SubmissionController@store');
+				Route::group(['middleware'=>['auth']], function(){
+
+					Route::resource('submissions','SubmissionController');
+					Route::get('submissions/{action}/{id}','SubmissionController@approval');
+					//report routes
+					Route::resource('reports','ReportController');
+					Route::resource('reports/custom/filter','ReportController@filter');
 				});
 
+					Route::get('submissions/{id?}',function(){
+					return view('employee_subs');
+				});
 				Route::get('submissions/single/user/{id}','SubmissionController@employeeSubs');
 
 				Route::get('submission/view/{id}',function(){
 					return view('view_sub');
 				});
 
-				//report routes
-				Route::resource('reports','ReportController');
-				Route::resource('reports/custom/filter','ReportController@filter');
+
 
 				//notifications routes
 				Route::resource('notifications','NotificationController');
 				Route::get('notifications/folder/{folder}','NotificationController@index');
 				Route::get('notifications/compose/message','NotificationController@compose');
+
+				Route::get('employee',function(){
+					return redirect('/submissions/single/user/'.Auth::user()->id);
+				});
 
 
 	});
@@ -44,21 +56,21 @@
 	});
 
 	Route::get('/home', function(){
-		return redirect('/');
+		return redirect('/auth/success');
 	});
 
+	Route::any('/auth/success',function(){
+		$is_admin = Auth::user()->is_admin;
+		if($is_admin){
+			return redirect('/submissions');
+		}
+		return redirect('/employee');
+	});
 
-
-
+	Route::any('/authorised',function(){
+		return view('errors.401');
+	});
 	Route::controllers([
 		'auth' => 'Auth\AuthController',
 		'password' => 'Auth\PasswordController',
 	]);
-
-/*
-Route::get('secret',function(){
-	return view('auth.crypt');
-});
-
-Route::get('secret/mockingbird','Auth\AuthController@vaultNow');
-*/

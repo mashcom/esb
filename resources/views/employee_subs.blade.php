@@ -8,8 +8,8 @@
 
   <div class="col-lg-3 col-sm-3 placeholder text-center">
     <center>
-              <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>MM57EY8</h4>
+              <img class="img-circle"  src="../default.png"/>
+                <h4>MM57EY8</h4>
               <h5 class="text-muted">Wilson Temani</h5>
               <h5 class="text-muted">Geology Dept.</h5>
     </center>
@@ -17,7 +17,7 @@
 
 
   <div class="col-md-9">
-            
+
           <table class="table table-striped table table-bordered">
             <thead>
               <tr>
@@ -38,7 +38,7 @@
                         <span class="caret"></span>
                         <span class="sr-only">Toggle Dropdown</span>
                       </button>
-                      
+
                       <ul class="dropdown-menu" role="menu">
                         <li><a href="#" class="text-success"><i class="fa fa-tick"></i> Approve</a></li>
                         <li><a href="#" class="text-danger">Disapprove</a></li>
@@ -46,7 +46,7 @@
 
                     </div></td>
               </tr>
-              
+
               <tr>                <td>2 days ago</td>
                  <td><span class="label label-danger">Disapproved</span></td>
                 <td>
@@ -69,5 +69,3 @@
           </table>
         </div>
 @endsection
-
-
