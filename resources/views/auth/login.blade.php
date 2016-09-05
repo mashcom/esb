@@ -31,8 +31,10 @@
 			          </label>
 			        </div>
 			        
-			        <button class="btn btn-lg btn-success btn-block" type="submit">Sign in</button>
-      				<a class="btn btn-link" href="{{ url('/password/email') }}">Forgot Your Password?</a>
+			        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      				<a class="btn btn-lg btn-default text-bold bold btn-block" href="{{ url('/auth/register') }}">Create Account</a>
+      				<a class="btn btn-link " href="{{ url('/password/email') }}"><b>Forgot Your Password?</b></a>
+
 						
       		</form>
 		</div>

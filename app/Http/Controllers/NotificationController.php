@@ -21,7 +21,7 @@ class NotificationController extends Controller {
 		if($folder =="sent"){
 			$column = "sender_id";
 		}
-		$notifications = Notification::where($column,Auth::user()->id)->get();
+		$notifications = Notification::where($column,Auth::user()->id)->orderBy('created_at','DESC')->get();
 		$inbox_count = $notifications->count();
 		$sent_count = $notifications->count();
 		return view('notifications.index',['notifications'=>$notifications,'inbox_count'=>$inbox_count,"sent_count"=>$sent_count,"folder"=>$folder]);
@@ -55,6 +55,7 @@ class NotificationController extends Controller {
 		$notification->subject = $request->subject;
 		$notification->message = $request->message;
 		$notification->category= "sent";
+
 
 		if($notification->save()){
 			return back()->with('message','Message sent successfully');

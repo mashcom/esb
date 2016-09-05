@@ -64,6 +64,18 @@
 
           </form>
       </div>
+
+      @if(isset($filter))
+      <div class="panel-footer">
+          Filter: <i>
+            <i class="fa fa-building-o"></i> Department: <b>{{$filter['dept']}}</b>
+            <i class="fa fa-users"></i> Team: <b>{{$filter['team']}}</b>
+            <i class="fa fa-calendar"></i> Between <b>{{$filter['from_date']}}</b>
+            and <b>{{$filter['to_date']}}</b>
+          </i>
+      </div>
+      @endif
+
     </div>
   </div>
 
@@ -174,7 +186,7 @@
             </td>
             <td>{{$submission->task}}</td>
             <td>
-              <a href="submissions/{{$submission->id}}" class="btn btn-default btn-xs">View</a>
+              <a href="/submissions/{{$submission->id}}" class="btn btn-default btn-xs">View</a>
             </td>
           </tr>
 

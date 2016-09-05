@@ -40,7 +40,7 @@
                     <span class="icon-bar"></span>
                 </button>
 
-                <a class="navbar-brand logo text-" href="{{url('submissions')}}">SHE Pact Submission System</a>
+                <a class="navbar-brand logo text-" href="{{url('auth/success')}}">SHE Pact Submission System</a>
             </div>
 
             <ul class="nav navbar-nav navbar-right navbar-collapse collapse">
@@ -49,6 +49,7 @@
 
                         @if(Auth::user()->is_admin)
                             <li><a href="{{url('reports')}}" class="">Reports</a></li>
+                            <li><a href="{{url('users')}}" class="">Users</a></li>
                             <li><a href="{{url('submissions')}}" class="">Submissions</a></li>
                         @endif
 

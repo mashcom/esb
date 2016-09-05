@@ -20,6 +20,14 @@
 					<form class="form-horizontal" role="form" method="POST" action="{{ url('/auth/register') }}">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
+
+						<div class="form-group">
+							<label class="col-md-4 control-label">Employee ID</label>
+							<div class="col-md-6">
+								<input type="text" class="form-control" name="employee_id" value="{{ old('employee_id') }}">
+							</div>
+						</div>
+
 						<div class="form-group">
 							<label class="col-md-4 control-label">Name</label>
 							<div class="col-md-6">
@@ -31,6 +39,17 @@
 							<label class="col-md-4 control-label">E-Mail Address</label>
 							<div class="col-md-6">
 								<input type="email" class="form-control" name="email" value="{{ old('email') }}">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-md-4 control-label">Department</label>
+							<div class="col-md-6">
+								<select class="form-control" name="department">
+									@foreach($departments as $department)
+										<option value={{$department->id}}>{{$department->name}}</option>
+									@endforeach
+								</select>
 							</div>
 						</div>
 

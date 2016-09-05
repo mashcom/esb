@@ -37,4 +37,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 		return $this->hasOne('App\Department','id','department_id');
 	}
 
+	public function section()
+	{
+		return $this->hasOne('App\Team','id','section_id');
+	}
+
 }

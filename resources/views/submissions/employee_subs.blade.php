@@ -110,7 +110,7 @@
                 <td>{{$submission->created_at}}</td>
 
                 <td>
-                  <a href="submissions/{{$submission->id}}" class="btn btn-default btn-xs">View</a>
+                  <a href="/submissions/id/{{$submission->id}}" class="btn btn-default btn-xs">View</a>
 @if(Auth::user()->is_admin ==1)
                   <div class="btn-group">
                       <button type="button" class="btn btn-default btn-xs">Action</button>
@@ -120,8 +120,8 @@
                       </button>
 
                       <ul class="dropdown-menu" role="menu">
-                        <li><a href="submissions/approved/{{$submission->id}}" class="text-success"><i class="fa fa-tick"></i> Approve</a></li>
-                        <li><a href="submissions/disapproved/{{$submission->id}}" class="text-danger">Disapprove</a></li>
+                        <li><a href="../../../submissions/approved/<?php echo $submission->id?>" class="text-success"><i class="fa fa-tick"></i> Approve</a></li>
+                        <li><a href="../../../submissions/disapproved/<?php echo $submission->id ?>" class="text-danger">Disapprove</a></li>
                       </ul>
 
                     </div>

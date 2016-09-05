@@ -33,7 +33,16 @@
 								<tbody>
 									@foreach($notifications as $n)
 									<tr>
-										<td class="mailbox-name"><a href="/notifications/{{$n->id}}">{{$n->sender->name}}</a></td>
+										<td class="mailbox-name text-bold bold"><a href="/notifications/{{$n->id}}">
+												<b>
+													@if($n->sender_id==0)
+													System Notification
+												@else
+													{{$n->sender->name}}
+												@endif
+											</b>
+
+										</a></td>
 										<td class="mailbox-subject">{{substr($n->message,0,40)}}</td>
 										<td class="mailbox-date">{{$n->created_at}}</td>
 									</tr>

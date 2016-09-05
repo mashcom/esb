@@ -19,13 +19,18 @@
 
 				Route::get('submissions/create/new','SubmissionController@create');
 				Route::post('submissions/store/new','SubmissionController@store');
-				Route::group(['middleware'=>['auth']], function(){
+				Route::get('submissions/id/{id}','SubmissionController@show');
+				//admin routes
+				Route::group(['middleware'=>['admin']], function(){
 
 					Route::resource('submissions','SubmissionController');
 					Route::get('submissions/{action}/{id}','SubmissionController@approval');
+					Route::post('submissions/list/search','SubmissionController@search');
 					//report routes
 					Route::resource('reports','ReportController');
 					Route::resource('reports/custom/filter','ReportController@filter');
+
+					Route::get('users','UserController@index');
 				});
 
 					Route::get('submissions/{id?}',function(){
@@ -37,7 +42,9 @@
 					return view('view_sub');
 				});
 
-
+				Route::any('/get/started',function(){
+						return view('errors.empty');
+					})	;
 
 				//notifications routes
 				Route::resource('notifications','NotificationController');
@@ -52,6 +59,9 @@
 	});
 
 	Route::get('/', function(){
+		if(Auth::check()){
+			return redirect('/home');
+		}
 		return view('welcome');
 	});
 

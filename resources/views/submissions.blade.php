@@ -3,13 +3,19 @@
 
  <div class="col-md-12">
             <h2>Submitted Forms</h2>
+            <!--
+        <form method="post" action="{{ url('submissions/list/search') }}">
+                   <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
             <div class="input-group margin col-lg-6">
-                    <input type="text" class="form-control" placeholder="Search here!">
+           
+                    <input type="text" class="form-control" name="query" placeholder="Search here!">
                     <span class="input-group-btn">
-                      <button class="btn btn-primary" type="button">Search</button>
+                      <button class="btn btn-primary" type="submit">Search</button>
                     </span>
+
             </div>
+             </form>-->
           </br>
           <table class="table table-striped table table-bordered">
             <thead>

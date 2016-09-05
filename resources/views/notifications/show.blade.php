@@ -10,7 +10,15 @@
                 <div class="panel-body no-padding">
                   <div class="mailbox-read-info">
                     <h4>Subject: {{$notification->subject}}</h4>
-                    <h5>From: {{$notification->sender->name}}  (MINE #: {{$notification->sender->employee_id}}) <span class="mailbox-read-time pull-right">{{$notification->created_at}}</span></h5>
+                    <h5>From:
+                      @if($notification->sender_id==0)
+                      System Notification
+                    @else
+                    {{$notification->sender->name}}  (MINE #: {{$notification->sender->employee_id}})
+
+                    @endif
+                      <span class="mailbox-read-time pull-right">{{$notification->created_at}}</span>
+                    </h5>
                   </div><!-- /.mailbox-read-info -->
 
                   <div class="mailbox-read-message">

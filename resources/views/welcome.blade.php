@@ -49,6 +49,7 @@
           <div class="mastfoot">
             <div class="inner">
               <p>Mimosa Mining Company &copy; 2016</p>
+              <p>Developed by W. Temani</p>
             </div>
           </div>
 

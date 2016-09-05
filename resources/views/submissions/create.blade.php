@@ -27,7 +27,7 @@
                         <label>Department</label>
                         <div class="input-group">
                           <div class="input-group-addon">
-                            <i class="fa fa-building"></i>
+                            <i class="fa fa-building-o"></i>
                           </div>
                           <select type="text" class="form-control" name="department_id">
                             @foreach ($departments as $dept)
@@ -55,14 +55,15 @@
                     </fieldset>
 
                     <fieldset>
-                      <legend>When did you see it?</legend>
+                <legend>When did you see it?</legend>
+                
                   <div class="col-lg-4">
                   <label>Date:</label>
                   <div class="input-group col-lg-12">
                     <div class="input-group-addon">
                       <i class="fa fa-calendar"></i>
                     </div>
-                    <input class="form-control" type="date" name="date">
+                    <input class="form-control" type="date" name="date" placeholder="mm/dd/yyyy">
                   </div><!-- /.input group -->
                 </div>
 
@@ -145,7 +146,7 @@
                                 <tr>
                                   <td>{{$b->description}}</td>
                                   <td>
-                                    <select class="form-control" name="behaviour_{{$b->id}}">
+                                    <select class="form-control input-sm" name="behaviour_{{$b->id}}">
                                       <option value=""></option>
                                       <option value="safe">Safe</option>
                                       <option value="unsafe">Unsafe</option>

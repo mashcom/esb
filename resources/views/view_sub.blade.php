@@ -11,7 +11,7 @@
   <div class="col-lg-3 col-sm-3 placeholder text-center">
 
     <center>
-              <img class="img-circle" src="../default.png" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+              <img class="img-circle" src="{{url('default.png')}}" width="200" height="200" class="img-responsive" alt="">
               <h4>{{$submission->user->name}}</h4>
               <h5 class="text-muted">{{$submission->user->employee_id}}</h5>
               <h5 class="text-muted">Dept: {{$submission->user->dept->name}}</h5>

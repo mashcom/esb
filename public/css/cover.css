@@ -28,11 +28,27 @@ html,
 body {
   height: 100%;
   background-color: rgb(0, 141, 76);
+  overflow: hidden;
 }
 body {
   color: #fff;
   text-align: center;
   text-shadow: 0 1px 3px rgba(0,0,0,.5);
+  background: url('http://localhost/projects/auth%20service/public/img/header.jpg') no-repeat center top;
+padding-top: 10px;
+text-align: center;
+background-attachment: relative;
+background-position: center center;
+min-height: 650px;
+width: 100%;
+-webkit-background-size: 100%;
+-moz-background-size: 100%;
+-o-background-size: 100%;
+background-size: 100%;
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
 }
 
 /* Extra markup and styles for table-esque vertical and horizontal centering */

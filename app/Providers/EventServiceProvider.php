@@ -10,11 +10,11 @@ class EventServiceProvider extends ServiceProvider {
 	 *
 	 * @var array
 	 */
-	protected $listen = [
-		'event.name' => [
-			'EventListener',
-		],
-	];
+	 protected $listen = [
+	     'App\Events\UserAuthenticated' => [
+	         'App\Listeners\SendSubmissionNotification',
+	     ],
+	 ];
 
 	/**
 	 * Register any other events for your application.

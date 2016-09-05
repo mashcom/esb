@@ -34,13 +34,50 @@ class ReportController extends Controller {
 		$departments = Department::all();
 		$teams = Team::all();
 
-		$submissions = Submission::with('user')
-		->whereBetween('date',[$request->from_date,$request->to_date])
-		->where('department_id',$request->department_id)
-		->where('section_id',$request->team_id)
-		->get();
+		$filter_dept = $request->department_id;
+		$filter_section = $request->team_id;
 
-		return view('reports.index',['submissions'=>$submissions,'departments'=>$departments,'teams'=>$teams]);
+		$filter_dept_name = "All";
+
+		$dept_condition = "!=";
+		if($filter_dept !="all"){
+			$dept_condition = "=";
+			$filter_dept_name = Department::find($filter_dept)->name;
+		}
+
+		$section_condition= "!=";
+		$filter_section_name = "All";
+		if($filter_section !="all"){
+			$section_condition=  "=";
+			$filter_section_name = Team::find($filter_section)->name;
+		}
+
+
+		if(empty($request->from_date)){
+			$filter_from_label = "No date";
+			$filter_to_label = "No date";
+			$submissions = Submission::with('user')
+			->where('department_id',$dept_condition,$request->department_id)
+			->where('section_id',$section_condition,$request->team_id)
+			->get();
+		}
+		else{
+				$filter_from_label = $request->from_date;
+				$last_date = $request->to_date;
+				$filter_to_label = $last_date;
+				if(empty($request->to_date)){
+						$filter_to_label = "Now";
+					$last_date = \Carbon\Carbon::now();
+				}
+				$submissions = Submission::with('user')
+				->whereBetween('date',[$request->from_date,$last_date])
+				->where('department_id',$dept_condition,$request->department_id)
+				->where('section_id',$section_condition,$request->team_id)
+				->get();
+		}
+		$filter_output = ["dept"=>$filter_dept_name,"team"=>$filter_section_name,"from_date"=>$filter_from_label,"to_date"=>$filter_to_label];
+
+		return view('reports.index',['filter'=>$filter_output,'submissions'=>$submissions,'departments'=>$departments,'teams'=>$teams]);
 
 
 	}
