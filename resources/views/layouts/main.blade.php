@@ -46,18 +46,26 @@
             <ul class="nav navbar-nav navbar-right navbar-collapse collapse">
                     @if(Auth::user())
 
-
-                        @if(Auth::user()->is_admin)
+                        <li><a href="{{url('notifications')}}" class="">Notifications</a></li>
+                        
+                        @if(Auth::user()->is_admin==1)
                             <li><a href="{{url('reports')}}" class="">Reports</a></li>
                             <li><a href="{{url('users')}}" class="">Users</a></li>
                             <li><a href="{{url('submissions')}}" class="">Submissions</a></li>
+                             <li><a>Role! <b>SHE Officer</b></a></li>
                         @endif
 
-                        @if(!Auth::user()->is_admin)
+                        @if(Auth::user()->is_admin==0)
                           <li><a href="{{url('submissions/create/new')}}" class="">New Submission</a></li>
+                           <li><a>Role! <b>Employee</b></a></li>
                         @endif
 
-                        <li><a href="{{url('notifications')}}" class="">Notifications</a></li>
+                         @if(Auth::user()->is_admin==2)
+                            <li><a href="{{url('users')}}" class="">Users</a></li>
+                            <li><a>Role! <b>Admin</b></a></li>
+                        @endif
+
+                   
 
 
                         <li><a>Hello! <b>{{Auth::user()->name}}</b></a></li>

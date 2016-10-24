@@ -5,6 +5,8 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Department;
+
 class UserController extends Controller {
 
 	/**
@@ -25,7 +27,8 @@ class UserController extends Controller {
 	 */
 	public function create()
 	{
-		//
+		$departments = 	Department::all();
+		return view('users.create',['departments'=>$departments]);
 	}
 
 	/**
@@ -33,9 +36,31 @@ class UserController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(Request $request)
 	{
-		//
+
+		$this->validate($request, [
+        	'department' => 'required',
+        	'is_admin' => 'required',
+        	'name' => 'required|max:255',
+			'email' => 'required|email|max:255|unique:users',
+			'password' => 'required|confirmed|min:6',
+			'employee_id'=>'required|min:4|max:10|unique:users,employee_id',
+			'department'=>'required|integer'
+    	]);
+
+		$Users = new User();
+		$Users->employee_id = $request->employee_id;
+		$Users->name = $request->name;
+		$Users->email = $request->email;
+		$Users->department_id = $request->department;
+		$Users->is_admin = $request->is_admin;
+		$Users->password = bcrypt($request->password);
+
+		if($Users->save()){
+			return back()->with('message','User added successfully');
+		}
+		return back()->withInput();
 	}
 
 	/**
@@ -46,7 +71,9 @@ class UserController extends Controller {
 	 */
 	public function show($id)
 	{
-		//
+		$user = User::findOrFail($id);
+		$departments = 	Department::all();
+		return view('users.show',['user'=>$user,'departments'=>$departments]);
 	}
 
 	/**
@@ -57,7 +84,7 @@ class UserController extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
+		
 	}
 
 	/**
@@ -66,9 +93,29 @@ class UserController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update(Request $request,$id)
 	{
-		//
+		
+		$Users = User::findOrFail($id);
+		$this->validate($request, [
+        	'department' => 'required',
+        	'is_admin' => 'required',
+        	'name' => 'required|max:255',
+			'email' => 'required|email|max:255|unique:users,email,'.$Users->id,
+			'employee_id'=>'required|min:4|max:10|unique:users,employee_id,'.$Users->id
+    	]);
+
+		
+		$Users->employee_id = $request->employee_id;
+		$Users->name = $request->name;
+		$Users->email = $request->email;
+		$Users->department_id = $request->department;
+		$Users->is_admin = $request->is_admin;
+
+		if($Users->save()){
+			return back()->with('message','User details updated successfully');
+		}
+		return back()->withInput();
 	}
 
 	/**
@@ -79,7 +126,11 @@ class UserController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+		$user = User::find($id);
+		if($user->delete()){
+			return back()->with('message','User deleted successfully');
+		}
+		return back()->with('error','User failed to deleted');
 	}
 
 }

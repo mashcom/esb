@@ -20,7 +20,7 @@
 
 			       
 			        <label for="inputEmail" class="sr-only">username</label>
-			        <input type="text" id="inputEmail" class="form-control" name="email" placeholder="Username" autofocus="" value="{{ old('email') }}">
+			        <input type="text" style="border-bottom-right-radius:0;border-bottom-left-radius:0;border-bottom:none" id="inputEmail" class="form-control" name="email" placeholder="Username" autofocus="" value="{{ old('email') }}">
 			        
 			        <label for="inputPassword" class="sr-only">Password</label>
 			        <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password">
@@ -32,8 +32,7 @@
 			        </div>
 			        
 			        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-      				<a class="btn btn-lg btn-default text-bold bold btn-block" href="{{ url('/auth/register') }}">Create Account</a>
-      				<a class="btn btn-link " href="{{ url('/password/email') }}"><b>Forgot Your Password?</b></a>
+      					<a class="btn btn-lg btn-danger btn-block " href="{{ url('/password/email') }}"><b>Forgot Password?</b></a>
 
 						
       		</form>

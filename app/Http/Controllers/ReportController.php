@@ -52,6 +52,16 @@ class ReportController extends Controller {
 			$filter_section_name = Team::find($filter_section)->name;
 		}
 
+		$filter_status = $request->status;
+		$status_condition = "!=";
+		$filter_status_name = "All";
+		if($filter_status !="all"){
+			$status_condition = "=";
+			$filter_status_name = ucfirst($filter_status);
+
+		}
+
+
 
 		if(empty($request->from_date)){
 			$filter_from_label = "No date";
@@ -59,6 +69,7 @@ class ReportController extends Controller {
 			$submissions = Submission::with('user')
 			->where('department_id',$dept_condition,$request->department_id)
 			->where('section_id',$section_condition,$request->team_id)
+			->where('status',$status_condition,$request->status)
 			->get();
 		}
 		else{
@@ -73,9 +84,10 @@ class ReportController extends Controller {
 				->whereBetween('date',[$request->from_date,$last_date])
 				->where('department_id',$dept_condition,$request->department_id)
 				->where('section_id',$section_condition,$request->team_id)
+				->where('status',$status_condition,$request->status)
 				->get();
 		}
-		$filter_output = ["dept"=>$filter_dept_name,"team"=>$filter_section_name,"from_date"=>$filter_from_label,"to_date"=>$filter_to_label];
+		$filter_output = ["dept"=>$filter_dept_name,"team"=>$filter_section_name,"from_date"=>$filter_from_label,"to_date"=>$filter_to_label,"status_label"=>$filter_status_name];
 
 		return view('reports.index',['filter'=>$filter_output,'submissions'=>$submissions,'departments'=>$departments,'teams'=>$teams]);
 

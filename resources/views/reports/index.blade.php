@@ -2,7 +2,6 @@
 
 @section('content')
 
-
   <div class="col-lg-12">
     <h1 class="text-bold text-center text-primary">Report</h1>
   </div>
@@ -45,6 +44,15 @@
             </select>
           </div>
 
+          <div class="form-group col-lg-2">
+            <label>Status</label>
+            <select type="text" class="form-control" name="status">
+                <option value="all">All</option>
+                <option value="approved">Approved</option>
+                <option value="pending">Pending</option>
+                <option value="disapproved">Disapproved</option>
+            </select>
+          </div>
 
           <div class="form-group col-lg-2">
             <label>From</label>
@@ -70,6 +78,7 @@
           Filter: <i>
             <i class="fa fa-building-o"></i> Department: <b>{{$filter['dept']}}</b>
             <i class="fa fa-users"></i> Team: <b>{{$filter['team']}}</b>
+            <i class="fa fa-tick"></i> Status: <b>{{$filter['status_label']}}</b>
             <i class="fa fa-calendar"></i> Between <b>{{$filter['from_date']}}</b>
             and <b>{{$filter['to_date']}}</b>
           </i>
@@ -168,10 +177,11 @@
           </tr>
         </thead>
         <tbody>
+
           @foreach ($submissions as $submission)
           <tr>
-            <td><a href="/submissions/single/user/{{$submission->user->id}}" title="view employee profile">{{$submission->user->employee_id}}</a></td>
-            <td>{{$submission->user->name}}</td>
+            <td><a href="/submissions/single/user/{{@$submission->user->id}}" title="view employee profile">{{@$submission->user->employee_id}}</a></td>
+            <td>{{@$submission->user->name}}</td>
             <td>{{$submission->created_at}}</td>
             <td class="h5">
               @if($submission->status =="approved")

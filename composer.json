@@ -17,7 +17,8 @@
 		],
 		"psr-4": {
 			"App\\": "app/",
-			"Faker\\": "vendor/fzaninotto/faker/src"
+			"Faker\\": "vendor/fzaninotto/faker/src",
+			"BackupManager\\":"vendor/backup-manager/src"
 		}
 	},
 	"autoload-dev": {

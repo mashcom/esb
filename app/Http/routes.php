@@ -30,10 +30,19 @@
 					Route::resource('reports','ReportController');
 					Route::resource('reports/custom/filter','ReportController@filter');
 
-					Route::get('users','UserController@index');
+					Route::resource('users','UserController');
+					Route::get('users/destroy/{id}','UserController@destroy');
+					Route::post('users/update/{id}','UserController@update');
+
+					//updated rourtes for adding new users
+
 				});
 
-					Route::get('submissions/{id?}',function(){
+
+				//reset password
+				Route::get('change/password','Auth\PasswordController@form');
+
+				Route::get('submissions/{id?}',function(){
 					return view('employee_subs');
 				});
 				Route::get('submissions/single/user/{id}','SubmissionController@employeeSubs');

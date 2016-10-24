@@ -6,11 +6,12 @@
             	<h1><i class="fa fa-cloud text-muted" style="font-size:5em"></i></h1>
               <h1>No submissions</h1>
               <p>
-                You do not have submissions yet, to get started click the button below.
+                No submisions found for this current user
 
               </p>
-              <a href="{{url('/submissions/create/new')}}" class="btn btn-primary">New Submission</a>
-              
+              @if(Auth::user()->is_admin==2)
+              	<a href="{{url('/submissions/create/new')}}" class="btn btn-primary">New Submission</a>
+              @endif	
             </div>
           </div>
 

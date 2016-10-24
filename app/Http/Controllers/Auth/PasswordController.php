@@ -35,4 +35,8 @@ class PasswordController extends Controller {
 		$this->middleware('guest');
 	}
 
+
+	public function form(){
+		return view('users.change_password');
+	}
 }

@@ -29,10 +29,14 @@
               </tr>
             </thead>
             <tbody>
+
               @foreach ($submissions as $submission)
+
               <tr>
-                <td><a href="/submissions/single/user/{{$submission->user->id}}" title="view employee profile">{{$submission->user->employee_id}}</a></td>
-                <td>{{$submission->user->name}}</td>
+                <td>
+                  <a href="submissions/single/user/{{@$submission->user->id}}" title="view employee profile">{{@$submission->user->employee_id}}</a>
+                </td>
+                <td>{{@$submission->user->name}}</td>
                 <td>{{$submission->created_at}}</td>
                 <td class="h5">
                   @if($submission->status =="approved")
